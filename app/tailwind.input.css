@@ -1,112 +1,429 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Ridgeway Slate & Seam — Architectural Standing-Seam & Slate Ledger
+ * Light: Quarry Slate & Kiln Terracotta
+ * Dark:  Storm-Night Slate & Hearth Clay
+ *
+ * --accent always carries white (#ffffff) button text (6.4:1 light, 5.2:1 dark).
+ */
 :root {
-  --bg: #f7f8fa;
-  --surface: #ffffff;
-  --text: #172033;
-  --muted: #526078;
-  --accent: #2457a7;
-  --accent-ink: #2457a7;
+  --bg: #f2f0ec;
+  --bg-band: #e5e1d8;
+  --surface: #faf9f6;
+  --surface-raised: #ebe7df;
+  --text: #181c20;
+  --muted: #4d565e;
+  --accent: #9e3b24;
+  --accent-hover: #7e2d1a;
+  --accent-ink: #8b321d;
+  --accent-soft: #f3dfd8;
   --on-accent: #ffffff;
-  --line: #c7cfdb;
-  --focus: #2457a7;
-  --map-filter: none;
+  --copper: #266053;
+  --copper-soft: #dcebe7;
+  --slate-band: #1c242b;
+  --slate-band-surface: #252f38;
+  --slate-band-ink: #f3f1ec;
+  --slate-band-muted: #b6c0c8;
+  --slate-band-accent: #f29d86;
+  --slate-band-copper: #72cbb7;
+  --slate-band-line: #3b4752;
+  --line: #c6c1b6;
+  --line-strong: #8d887d;
+  --focus: #9e3b24;
+  --seam-stripe: rgba(24, 28, 32, 0.045);
+  --grid-line: rgba(24, 28, 32, 0.055);
+  --map-filter: saturate(0.85) contrast(1.02);
+  --eave-tile: #1c242b;
+  --eave-tile-alt: #2f3b46;
+  --eave-joint: #8d887d;
+  --eave-nail: #72cbb7;
   color-scheme: light;
 }
+
 @media (prefers-color-scheme: dark) {
- :root:not(.light) {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
-  --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
-  --map-filter: grayscale(.4) brightness(.8);
-  color-scheme: dark;
- }
+  :root:not(.light) {
+    --bg: #12161a;
+    --bg-band: #181f25;
+    --surface: #1d252c;
+    --surface-raised: #242e37;
+    --text: #f0eeea;
+    --muted: #aeb7bf;
+    --accent: #b3442a;
+    --accent-hover: #96361f;
+    --accent-ink: #f29d86;
+    --accent-soft: #3a201a;
+    --on-accent: #ffffff;
+    --copper: #6bc0ad;
+    --copper-soft: #1a332e;
+    --slate-band: #0c1014;
+    --slate-band-surface: #151c22;
+    --slate-band-ink: #f0eeea;
+    --slate-band-muted: #a8b3bd;
+    --slate-band-line: #2d3842;
+    --line: #36424d;
+    --line-strong: #556574;
+    --focus: #f29d86;
+    --seam-stripe: rgba(240, 238, 234, 0.04);
+    --grid-line: rgba(240, 238, 234, 0.045);
+    --map-filter: grayscale(0.45) brightness(0.78) contrast(1.08);
+    --eave-tile: #4a5a69;
+    --eave-tile-alt: #5d6f80;
+    --eave-joint: #12161a;
+    --eave-nail: #6bc0ad;
+    color-scheme: dark;
+  }
 }
+
 :root.dark {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
+  --bg: #12161a;
+  --bg-band: #181f25;
+  --surface: #1d252c;
+  --surface-raised: #242e37;
+  --text: #f0eeea;
+  --muted: #aeb7bf;
+  --accent: #b3442a;
+  --accent-hover: #96361f;
+  --accent-ink: #f29d86;
+  --accent-soft: #3a201a;
   --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
-  --map-filter: grayscale(.4) brightness(.8);
+  --copper: #6bc0ad;
+  --copper-soft: #1a332e;
+  --slate-band: #0c1014;
+  --slate-band-surface: #151c22;
+  --slate-band-ink: #f0eeea;
+  --slate-band-muted: #a8b3bd;
+  --slate-band-accent: #f29d86;
+  --slate-band-copper: #72cbb7;
+  --slate-band-line: #2d3842;
+  --line: #36424d;
+  --line-strong: #556574;
+  --focus: #f29d86;
+  --seam-stripe: rgba(240, 238, 234, 0.04);
+  --grid-line: rgba(240, 238, 234, 0.045);
+  --map-filter: grayscale(0.45) brightness(0.78) contrast(1.08);
+  --eave-tile: #4a5a69;
+  --eave-tile-alt: #5d6f80;
+  --eave-joint: #12161a;
+  --eave-nail: #6bc0ad;
   color-scheme: dark;
 }
 
 @theme {
   --color-*: initial;
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --radius-ui: .375rem;
+  --font-display: 'Syne Variable', 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-ui: 0.25rem;
 }
+
 @theme inline {
   --color-bg: var(--bg);
+  --color-bg-band: var(--bg-band);
   --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
   --color-ink: var(--text);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
   --color-on-accent: var(--on-accent);
+  --color-copper: var(--copper);
+  --color-copper-soft: var(--copper-soft);
+  --color-slate-band: var(--slate-band);
+  --color-slate-band-surface: var(--slate-band-surface);
+  --color-slate-band-ink: var(--slate-band-ink);
+  --color-slate-band-muted: var(--slate-band-muted);
+  --color-slate-band-accent: var(--slate-band-accent);
+  --color-slate-band-copper: var(--slate-band-copper);
+  --color-slate-band-line: var(--slate-band-line);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
 }
+
 :root {
-  --measure: 42rem;
+  --measure: 44rem;
   --jamstacks-font-family: var(--font-sans);
   --jamstacks-color-text: var(--text);
   --jamstacks-color-background: var(--surface);
   --jamstacks-color-primary: var(--accent);
-  --jamstacks-color-border: var(--line);
+  --jamstacks-color-border: var(--line-strong);
   --jamstacks-color-muted: var(--muted);
   --jamstacks-color-link: var(--accent-ink);
   --jamstacks-border-radius: var(--radius-ui);
-  --jamstacks-control-height: 2.75rem;
+  --jamstacks-control-height: 2.85rem;
   --jamstacks-spacing: 1rem;
   --jamstacks-form-max-width: 40rem;
   --jamstacks-toggle-color: var(--text);
   --jamstacks-toggle-dark-color: var(--text);
-  --jamstacks-toggle-border: var(--line);
+  --jamstacks-toggle-border: var(--line-strong);
   --jamstacks-toggle-background: var(--surface);
   --jamstacks-toggle-dark-background: var(--surface);
   --jamstacks-toggle-focus-color: var(--focus);
 }
+
 @layer base {
-  html { background: var(--bg); color: var(--text); font-family: var(--font-sans); scroll-padding-top: 1.5rem; }
-  body { margin: 0; line-height: 1.6; }
-  main { min-height: 65vh; }
-  a { text-underline-offset: .2em; }
-  a:hover { text-decoration: underline; }
-  button { cursor: pointer; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-  [aria-current="page"] { text-decoration: underline; }
+  html {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    scroll-padding-top: 2rem;
+    accent-color: var(--accent);
+  }
+  body {
+    margin: 0;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    min-height: 65vh;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1.5px;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  button {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+  [aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2.5px;
+  }
 }
-@utility wrap { width: min(100% - 2rem, 72rem); margin-inline: auto; }
+
+@utility wrap {
+  width: min(100% - 2rem, 76rem);
+  margin-inline: auto;
+}
+
 @layer components {
-  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .6rem 1.2rem; border: 1px solid var(--accent); border-radius: var(--radius-ui); background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
-  .button:hover { text-decoration: underline; }
-  .button-quiet { background: var(--surface); color: var(--accent-ink); border-color: var(--line); }
-  .text-link { color: var(--accent-ink); text-decoration: underline; }
-  .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .skip-link { position: absolute; left: 1rem; top: -8rem; padding: .75rem; z-index: 200; background: var(--surface); }
-  .skip-link:focus { top: 1rem; }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.9rem;
+    padding: 0.65rem 1.35rem;
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-ui);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+  }
+  .button:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .button-quiet {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--line-strong);
+  }
+  .button-quiet:hover {
+    background: var(--surface-raised);
+    border-color: var(--text);
+    color: var(--text);
+  }
+  .button-on-slate {
+    background: var(--accent);
+    color: var(--on-accent);
+    border-color: var(--accent);
+  }
+  .button-on-slate:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+  .text-link {
+    color: var(--accent-ink);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+  /* Small roof-gable chevron that caps eyebrow labels */
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 1.05em;
+    height: 0.62em;
+    margin-right: 0.55em;
+    vertical-align: 0.08em;
+    background: currentColor;
+    clip-path: polygon(0 100%, 50% 0, 100% 100%, 80% 100%, 50% 38%, 20% 100%);
+  }
+  /* Primary nav: a ridge cap sits above the hovered / current page link */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -0.55rem;
+    width: 1.1rem;
+    height: 0.5rem;
+    translate: -50% 0;
+    background: var(--accent);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%, 78% 100%, 50% 40%, 22% 100%);
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+  .nav-link:hover::before,
+  .nav-link[aria-current='page']::before {
+    opacity: 1;
+    transform: none;
+  }
+  .spec-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.55rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 0.15rem;
+    background: var(--surface-raised);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .seam-surface {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 47px,
+      var(--seam-stripe) 47px,
+      var(--seam-stripe) 48px
+    );
+  }
+  .drafting-surface {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: -8rem;
+    padding: 0.75rem 1rem;
+    z-index: 200;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-ui);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+  .faq-item {
+    border-top: 1px solid var(--line);
+  }
+  .faq-item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 0;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::after {
+    content: '+';
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-ink);
+    flex-shrink: 0;
+    transition: transform 150ms ease;
+  }
+  .faq-item[open] summary::after {
+    content: '−';
+  }
 }
-.map iframe { width: 100%; min-height: 20rem; border: 0; filter: var(--map-filter); }
-.enquiry__host { display: block; }
-.enquiry__status { margin-top: 1rem; color: var(--muted); }
-.enquiry[data-state="present"] > .enquiry__status { display: none; }
+
+/* Interactive roof assembly diagram layer highlight */
+.assembly-layer-shape {
+  transition: opacity 180ms ease, filter 180ms ease;
+}
+
+.map iframe {
+  width: 100%;
+  min-height: 21rem;
+  border: 0;
+  filter: var(--map-filter);
+}
+
+.enquiry__host {
+  display: block;
+}
+.enquiry__status {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+.enquiry[data-state='present'] > .enquiry__status {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
+
 @media print {
-  nav, .skip-link, .enquiry, button { display: none !important; }
-  html { background: white; color: black; }
-  a { color: inherit; }
+  nav, .skip-link, .enquiry, button, .no-print {
+    display: none !important;
+  }
+  html, body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+  .seam-surface, .drafting-surface {
+    background-image: none !important;
+  }
+  a {
+    color: inherit;
+  }
 }

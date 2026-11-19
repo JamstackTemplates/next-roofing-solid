@@ -1,0 +1,22 @@
+{
+  "templateId": "next-roofing-solid",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fullPage": false,
+  "captures": [
+    {
+      "mode": "light",
+      "sha256": "052d703a5cc0968bc6bcbd5a0b9d2ab194f166be783263d76b5ff0b1329bc6a4",
+      "file": "jamstacks/home-light.jpg",
+      "bytes": 138246
+    },
+    {
+      "mode": "dark",
+      "sha256": "d5b0ae14d4d087e87e57a9c74218bba0b659f57686e58c366ae0e433cbf36c4d",
+      "file": "jamstacks/home-dark.jpg",
+      "bytes": 135126
+    }
+  ]
+}

@@ -1,52 +1,52 @@
-# JamstackTemplates Next.js starter
+# Ridgeway Slate & Seam (`next-roofing-solid`)
 
-The shared starter for Next.js templates in the `JamstackTemplates` organization. Its canonical home is
-`JamstackTemplates/template-next`, alongside the templates generated from it.
-It is not a gallery design or a published demo. Business content is sample content. No application code
-in a website created from this template depends on the starter checkout or the portal repository.
+A self-contained static Next.js website for residential and commercial roofing contractors — built
+for **Ridgeway Slate & Seam** (fictitious Portland, Oregon sample for the Jamstacks gallery). No
+application code depends on the starter or portal repository at runtime.
 
-## Build your website
+## Local preview
 
-Start in the checkout of the repository GitHub created from `JamstackTemplates/template-next`. All
-starter files are already present. Local development requires Node 24 or later and npm.
+Local development requires Node 24 or later and npm.
 
-To build a new site, fill in `plan/PLAN.md`, then tell the coding agent **`Implement plan/PLAN.md`**.
-In Claude Code, `/write-plan <business description>` drafts the brief for you. For a gallery template,
-pass the table row: `/write-plan next-type-style | Business | Description | Form purpose`.
-After reviewing the finished site, run `/cleanup-plan` or delete `plan/` and `.claude/skills/` by hand
-to remove all initial build instructions.
+```sh
+npm ci
+npm run dev
+```
 
-To preview locally, run `npm ci` and `npm run dev` from the repository root.
+To build and verify locally, run `npm run check` and `npm start`.
 
 ## Pages
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Minimal content-driven home page and Organization JSON-LD |
-| `/contact/` | Hosted support form when configured; visible email alternative |
-| `/404.html` | Friendly static error page |
+| `/` | Architectural roofline hero, structural spec strip, 4 featured roof systems, interactive 6-layer roof assembly cutaway, recent Portland project job sheets, inspection workflow, and `RoofingContractor` JSON-LD |
+| `/services/` | Interactive category-filtered roofing systems & repairs catalog with guide pricing per square, side-by-side comparison table, and native `<details>` FAQ |
+| `/projects/` | Completed roof job sheets with architectural roof-shape silhouettes, Willamette Valley service areas, yard map, and office hours |
+| `/contact/` | Hosted Jamstacks support form when configured; visible public email fallback (`CopyEmail`), office hours, and helpful details checklist |
+| `/404.html` | Themed missing-shingle error page |
 
 ## Make it yours
 
 | File | Owns |
 | --- | --- |
-| `content/business.ts` | Shared business name, contact details and starter sample copy |
-| `app/page.tsx`, `app/<route>/page.tsx` | Page composition and editable copy such as headings and calls to action |
-| `content/menu.ts` or `content/services.ts` (add when needed) | Industry-specific typed collections |
-| `site.config.json` | Public name, description, hostname, optional timeZone and Jamstacks integration |
-| `app/tailwind.input.css` | Theme tokens, utility mappings and small shared styles |
-| `components/site-header.tsx`, `site-footer.tsx` | Replaceable navigation and visual shell |
-| `lib/structured-data.ts` | Schema type/properties derived from real content |
-| `app/sitemap.ts` | Public routes; update when adding a page |
+| `content/business.ts` | Business name, tagline, licence, phone, email, Pearl District yard address, service areas, weekly office hours, and enquiry message guidance |
+| `content/services.ts` | Roofing systems & repair catalog: IDs, categories, wind ratings, lifespans, guide prices per square (`pricePerSquareUsd`) / starting prices, `leadTime`, and `available` flags |
+| `content/projects.ts` | Completed project job sheets (`serviceId` references `content/services.ts`, pitch, squares, neighborhood, condition & scope) |
+| `content/assembly.ts` | Six structural layers for the interactive "Anatomy of a Solid Roof" cross-section |
+| `content/faq.ts` | Roofing FAQ entries rendered in native `<details>` disclosures on `/services/` |
+| `app/page.tsx`, `app/services/page.tsx`, `app/projects/page.tsx`, `app/contact/page.tsx`, `app/not-found.tsx` | Page-specific headings, introductions, and call-to-action copy written as JSX children |
+| `site.config.json` | Public name, description, hostname, `timeZone` (`America/Los_Angeles`), and Jamstacks site/CDN integration |
+| `app/tailwind.input.css` | Slate-and-terracotta palette tokens (light, automatic dark, explicit dark), Syne / Plus Jakarta Sans / JetBrains Mono mappings, standing-seam and drafting textures, and Jamstacks form variables |
+| `components/art/*` | Bespoke inline SVG illustrations (`HeroRoofElevation`, `RoofAssemblyDiagram`, `MaterialProfileArt`, `ProjectRoofSilhouette`, `BrandMark`, `RidgeDivider`, `MissingShingleArt`) |
+| `lib/structured-data.ts` | `RoofingContractor` JSON-LD derived from `content/business.ts` |
+| `app/sitemap.ts` | Public routes (`/`, `/services/`, `/projects/`, `/contact/`) |
 
-Edit page copy in the route file, for example `<Hero.Heading>Seasonal flowers</Hero.Heading>`
-in `app/page.tsx` for the Home page. The backing
-component owns the styling and interactions. Use typed fields for data the site needs to look up or
-reuse. For example, change `business.email` to update Contact. Rename in `business.name` and
-`site.config.json.name`. Add a typed core-content file for frequent owner edits: a food menu should use
-the existing sections/items/price/availability model; changes such as sold out, seasonal or a new section
-should be data edits with actionable content tests. Do not add business content to configuration: the
-Jamstacks provisioner replaces that file wholesale, possibly adding `provisioningId`.
+### Common owner edits
+
+- **Update guide pricing, lead times, or availability:** Edit `pricePerSquareUsd`, `startingPriceUsd`, `leadTime`, or `available` in `content/services.ts`, then run `npm run check`.
+- **Add a completed roof:** Append a new entry to `content/projects.ts` referencing an existing `serviceId` from `content/services.ts`.
+- **Change business name, phone, email, or hours:** Edit `content/business.ts` (and update `site.config.json`'s `name` when renaming).
+- **Fonts:** Self-hosted via `@fontsource-variable/syne`, `@fontsource-variable/plus-jakarta-sans`, and `@fontsource/jetbrains-mono` (SIL Open Font License 1.1).
 
 ## Appearance and optional local-business features
 

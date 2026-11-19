@@ -1,20 +1,36 @@
 import type { ReactNode } from 'react';
+import { BlueprintPageMotif } from './art/ridge-divider';
 
-/** Heading block for inner pages: eyebrow, large title (use <em> for the accent words) and a lede. */
-export function PageHead({ eyebrow, title, children, id, before }: {
-  eyebrow: string;
-  title: ReactNode;
+export function PageHead({
+  eyebrow,
+  title,
+  specLabel,
+  children,
+}: {
+  eyebrow?: string;
+  title: string;
+  specLabel?: string;
   children?: ReactNode;
-  id?: string;
-  /** Optional illustration above the eyebrow. */
-  before?: ReactNode;
 }) {
   return (
-    <header className="wrap pt-[clamp(2.5rem,6vw,4.5rem)] pb-[clamp(1.5rem,3vw,2.5rem)]">
-      {before}
-      <p className="eyebrow">{eyebrow}</p>
-      <h1 id={id} className="mt-3 mb-5 max-w-[18ch] text-[clamp(2.6rem,6.5vw,4.6rem)]">{title}</h1>
-      {children ? <div className="max-w-(--measure) text-[clamp(1.08rem,1.6vw,1.22rem)] text-muted">{children}</div> : null}
-    </header>
+    <section className="drafting-surface border-b border-line-strong bg-bg-band">
+      <div className="wrap flex flex-col justify-between gap-6 py-12 md:flex-row md:items-end md:py-16">
+        <div className="max-w-2xl">
+          <div className="flex flex-wrap items-center gap-3">
+            {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+            {specLabel ? <span className="spec-tag">{specLabel}</span> : null}
+          </div>
+          <h1 className="mt-3 text-4xl font-extrabold leading-[1.06] sm:text-5xl">
+            {title}
+          </h1>
+          {children ? (
+            <div className="mt-4 max-w-[var(--measure)] text-base text-muted sm:text-lg">
+              {children}
+            </div>
+          ) : null}
+        </div>
+        <BlueprintPageMotif className="hidden h-20 w-44 shrink-0 md:block" />
+      </div>
+    </section>
   );
 }

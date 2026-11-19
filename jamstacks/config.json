@@ -1,0 +1,19 @@
+{
+  "name": "Solid roofing",
+  "description": "An architectural slate-and-terracotta theme for roofing contractors: standing-seam and shingle systems with guide pricing, an interactive 6-layer roof assembly cross-section, completed project job sheets, office hours, yard map and a Jamstacks contact component for inspection enquiries.",
+  "tech": "next",
+  "type": "roofing",
+  "style": "solid",
+  "internal": false,
+  "components": [
+    "support-form"
+  ],
+  "configFile": "site.config.json",
+  "screenshots": {
+    "light": "jamstacks/home-light.jpg",
+    "dark": "jamstacks/home-dark.jpg",
+    "theme": {
+      "strategy": "media"
+    }
+  }
+}
